@@ -3,12 +3,13 @@ package estados4;
 public class Proceso implements Runnable {
 	private String name;
 	private String state;
-	private boolean pausa;
+	private boolean pausa = false;
 	private int time;
 	
-	public Proceso(String name, int time) {
+	public Proceso(String name, int time, boolean pausa) {
 		this.name= name;
 		this.time = time;
+		this.pausa = pausa;
 	}
 	
 	public String toString() {
@@ -17,17 +18,36 @@ public class Proceso implements Runnable {
 	
 	
 	public void run() {
-		System.out.println("--------PROCESO "+ getName()+" LISTO--------");
+		System.out.println("\tPROCESO "+ getName()+" LISTO");
 		for (int i = 0; i <= 100; i+=5) {
-			System.out.println("El proceso "+getName()+" esta en ejecución.... "+ i+"%");
-			try {
-				Thread.sleep(time*100);
-			} catch (InterruptedException e) {
-				System.err.print("-------- PROCESO "+ getName()+ " INTERRUMPIDO --------\n\n");
-			}
-			if (i==100) {
+			if (pausa==false) {
+				System.out.println("El proceso "+getName()+" esta en ejecución.... "+ i+"%");
+				try {
+					Thread.sleep(time*100);
+				} catch (InterruptedException e) {
+					System.err.print("-------- PROCESO "+ getName()+ " INTERRUMPIDO --------\n\n");
+				}
+				if (i==100) {
 				System.out.println("-------- PROCESO "+ getName() +" TERMINADO --------\n\n");
+				}
+			}else {
+				System.out.println("El proceso "+getName()+" esta en ejecución.... "+ i+"%");
+				
+				if (i==50) {
+					try {
+					Thread.sleep(2000);
+					System.out.println("***** Proceso pausado *****");
+					Thread.sleep(time*100);
+					} catch (InterruptedException e) {
+					System.err.print("-------- PROCESO "+ getName()+ " INTERRUMPIDO --------\n\n");
+					}
+				}
+				
+				if (i==100) {
+				System.out.println("-------- PROCESO "+ getName() +" TERMINADO --------\n\n");
+				}
 			}
+			
 		}
 	}
 
