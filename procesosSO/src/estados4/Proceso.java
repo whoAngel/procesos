@@ -17,12 +17,13 @@ public class Proceso implements Runnable {
 	
 	
 	public void run() {
+		System.out.println("--------PROCESO "+ getName()+" LISTO--------");
 		for (int i = 0; i <= 100; i+=5) {
 			System.out.println("El proceso "+getName()+" esta en ejecución.... "+ i+"%");
 			try {
 				Thread.sleep(time*100);
 			} catch (InterruptedException e) {
-				System.err.print("-------- PROCESO "+ getName()+ " INTERRUMPIDO --------\\n\\n");
+				System.err.print("-------- PROCESO "+ getName()+ " INTERRUMPIDO --------\n\n");
 			}
 			if (i==100) {
 				System.out.println("-------- PROCESO "+ getName() +" TERMINADO --------\n\n");
