@@ -15,17 +15,13 @@ public class Proceso implements Runnable {
 	}
 	
 	
-	 //public String toString() { return "Proceso " + name + " "+ state; }
-	 
-	
-	
 	public void run() {
 		
 		System.out.println("\tPROCESO "+ getName()+" LISTO");
 			//Asigno recursos
 			try {
 				System.out.println("\tASIGNANDO RECURSOS::::::::::");
-				Thread.sleep(time*1500);
+				Thread.sleep(time*1250);
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
